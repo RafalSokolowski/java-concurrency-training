@@ -22,7 +22,7 @@ Wyobraź sobie, że masz pojemnik, który wypełnia się tokenami z szybkością
 Pojemnik może pomieścić maksymalnie N tokenów. Zaimplementuj klasę bezpieczną wielowątkowo, która umożliwia
 wątkom działanie gdy dostępny jest token. Jeśli żaden token nie jest dostępny, wątki żądające tokenu powinny
 zostać zablokowane. Klasa powinna udostępniać metodę o nazwie getToken, która skutkuje blokadą wątku do
-czasu dostępności tokenu.
+czasu dostępności tokenu
 
 Zadanie 5
 Zaimplementuj kolejkę blokującą używając:
@@ -32,7 +32,6 @@ Zaimplementuj kolejkę blokującą używając:
 
 Zadanie 6
 Wyobraź sobie, że pod koniec konferencji politycznej partia X i partia Y próbują opuścić miejsce i jednocześnie
-zamawiają przejazdy taxiManager. Aby jednak upewnić się, że podczas jazdy taxiManager nie wybuchnie żadna walka, programiści
-opracowali algorytm, zgodnie z którym przejazd jest możliwy gdy w samochodzie będą tylko politycy partii X lub partii Y
-lub dwóch partii X i dwóch partii Y. Wszystkie inne kombinacje mogą skutkować walką.
-Twoim zadaniem jako programisty jest zamodelowanie przejazdów jako wątków.
+zamawiają przejazdy taxi. Aby upewnić się, że podczas jazdy nie wybuchnie walka, należy opracować algorytm,
+zgodnie z którym przejazd jest możliwy, gdy w samochodzie będą tylko politycy jednej partii
+lub dokładnie po dwóch z partii X i partii Y
