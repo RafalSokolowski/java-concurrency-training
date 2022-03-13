@@ -10,17 +10,17 @@ public class PrintingQueue {
     private static final int MAX_TIMEOUT = 10_000;
 
     private final Random random = new Random();
-    //private final Semaphore semaphore;
-    private final BoundedSemaphore semaphore;
+    private final Semaphore semaphore;
+    //private final BoundedSemaphore semaphore;
     private final Logger logger = Logger.getLogger(getClass().getName());
 
-    /*public PrintingQueue(Semaphore semaphore) {
-        this.semaphore = semaphore;
-    }*/
-
-    public PrintingQueue(BoundedSemaphore semaphore) {
+    public PrintingQueue(Semaphore semaphore) {
         this.semaphore = semaphore;
     }
+
+   /* public PrintingQueue(BoundedSemaphore semaphore) {
+        this.semaphore = semaphore;
+    }*/
 
     public void print(String text) {
         try {

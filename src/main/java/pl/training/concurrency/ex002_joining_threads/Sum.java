@@ -16,10 +16,10 @@ public class Sum implements Runnable {
     public void run() {
         try {
             Thread.sleep(SLEEP_TIME);
+            System.out.printf("Result: %s\n", firstValue + secondValue);
         } catch (InterruptedException e) {
             System.out.println("Stopping sum thread");
         }
-        System.out.printf("Result: %s\n", firstValue + secondValue);
     }
 
 }

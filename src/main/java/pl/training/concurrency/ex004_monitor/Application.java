@@ -5,8 +5,8 @@ import java.util.Queue;
 
 public class Application {
 
-    private static final int THREADS_COUNT = 2;
-    private static final int PRINTING_QUEUE_LIMIT = 10;
+    private static final int THREADS_COUNT = 20;
+    private static final int PRINTING_QUEUE_LIMIT = 100;
 
     public static void main(String[] args) {
         Queue<String> printingQueue = new LinkedList<>();
