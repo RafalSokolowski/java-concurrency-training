@@ -69,6 +69,15 @@ public class Application {
         Runtime.getRuntime()
                 .addShutdownHook(new Thread(compositeDisposable::dispose));
 
+
+        var disposable = ObservableReader.from(System.in)
+                .debounce(5, TimeUnit.SECONDS)
+                .flatMap(query -> Observable.zip(sendWikipediaQuery(query), sendGithubQuery(query), this::combineResults))
+                .subscribe(System.out::println, System.out::println, () -> System.out.println("Completed"));
+
+        compositeDisposable.add(disposable);
+
+
         /*compositeDisposable.add(
                 ObservableReader.from(System.in)
                     .flatMap(this::sendWikipediaQuery)
@@ -76,14 +85,14 @@ public class Application {
         );*/
 
 
-        compositeDisposable.add(
-                ObservableReader.from(System.in)
-                        .debounce(5, TimeUnit.SECONDS)
-                        .flatMap(query -> Observable.zip(sendWikipediaQuery(query), sendGithubQuery(query), this::combineResults))
-                        .flatMap(Observable::fromIterable)
-                        .map(String::toLowerCase)
-                        .subscribe(System.out::println, System.out::println, () -> System.out.println("Completed"))
-        );
+//        compositeDisposable.add(
+//                ObservableReader.from(System.in)
+//                        .debounce(5, TimeUnit.SECONDS)
+//                        .flatMap(query -> Observable.zip(sendWikipediaQuery(query), sendGithubQuery(query), this::combineResults))
+//                        .flatMap(Observable::fromIterable)
+//                        .map(String::toLowerCase)
+//                        .subscribe(System.out::println, System.out::println, () -> System.out.println("Completed"))
+//        );
     }
 
 

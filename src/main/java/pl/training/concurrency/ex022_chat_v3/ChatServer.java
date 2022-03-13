@@ -24,9 +24,8 @@ public class ChatServer {
     private void start(int port) {
         Runtime.getRuntime().addShutdownHook(new Thread(compositeDisposable::dispose));
         try {
-            ServerSocket serverSocket = new ServerSocket(port);
             log.log(Level.SEVERE, "Server is listening on port: " + port);
-            compositeDisposable.add(ObservableSocket.from(serverSocket).subscribe(this::onNextSocket));
+            compositeDisposable.add(ObservableSocket.from(new ServerSocket(port)).subscribe(this::onNextSocket));
         } catch (IOException e) {
             log.log(Level.SEVERE, "Server failed to start: " + e.getMessage());
         }
