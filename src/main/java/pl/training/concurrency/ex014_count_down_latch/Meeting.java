@@ -14,8 +14,8 @@ public class Meeting implements Runnable {
     }
 
     public void addParticipant(String name) {
-        countDownLatch.countDown();
         logger.log(Level.INFO, name + " has joined meeting\n");
+        countDownLatch.countDown();
     }
 
     @Override

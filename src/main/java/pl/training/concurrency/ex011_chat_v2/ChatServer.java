@@ -4,15 +4,13 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class ChatServer {
 
-    private final Logger logger = Logger.getLogger(getClass().getName());
-    private final ChatWorkers chatWorkers = new ChatWorkers();
-    private final ExecutorService executorService = Executors.newFixedThreadPool(1024);
+    private final ChatServerFactory factory = new DefaultChatServerFactory();
+    private final Logger logger = factory.createLogger();
+    private final ChatWorkers chatWorkers = factory.createChatWorkers();
+    private final ExecutorService executorService = factory.createExecutorService();
 
     public static void main(String[] args) {
         int port = Integer.parseInt(args[0]);
@@ -24,15 +22,15 @@ public class ChatServer {
             ServerSocket serverSocket = new ServerSocket(port);
             listen(serverSocket, port);
         } catch (IOException e) {
-            logger.log(Level.SEVERE, "Server failed to start: " + e.getMessage());
+            logger.log("Server failed to start: " + e.getMessage());
         }
     }
 
     private void listen(ServerSocket serverSocket, int port) throws IOException {
-        logger.log(Level.INFO, "Server is listening on port: " + port);
+        logger.log("Server is listening on port: " + port);
         while (true) {
             Socket socket = serverSocket.accept();
-            logger.log(Level.INFO, "New connection established...");
+            logger.log("New connection established...");
             ChatWorker chatWorker = new ChatWorker(socket, chatWorkers);
             chatWorkers.add(chatWorker);
             executorService.execute(chatWorker);
